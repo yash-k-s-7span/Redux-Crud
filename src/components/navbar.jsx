@@ -1,11 +1,17 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState,useEffect } from "react";
+import { useSelector,useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { searchUser } from "../features/user-details-slice";
 
 const NavBar = () => {
     const allusers = useSelector((state) => state.app.users);
     const [searchData, setSearchData] = useState("");
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(searchUser(searchData));
+    },[searchData])
 
     return (
         <div>
